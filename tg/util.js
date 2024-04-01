@@ -1,4 +1,4 @@
-const { ALLOWED_USER_IDS } = require("./config");
+const { ALLOWED_USER_IDS, DATE_FORMAT } = require("./config");
 
 const checkUserAllowed = (userId, success, error) => {
   if (ALLOWED_USER_IDS.includes(userId)) {
