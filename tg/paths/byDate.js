@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const { TELEGRAM_BY_DATE_PATH, REPLY_MARKUP_BUTTON, DATE_FORMAT } = require('../config');
 const { getRevenueByDate } = require('../../solana');
@@ -12,7 +12,7 @@ const byDate = (bot) => {
     checkUserAllowed(
       userId,
       async () => {
-        const date = moment(match[1], DATE_FORMAT).utcOffset(3);
+        const date = moment(match[1], DATE_FORMAT).tz('Europe/Riga');
 
         if (!date.isValid()) {
           bot.sendMessage(chatId, "Invalid date provided!");
