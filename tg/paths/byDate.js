@@ -12,7 +12,7 @@ const byDate = (bot) => {
     checkUserAllowed(
       userId,
       async () => {
-        const date = moment(match[1], DATE_FORMAT).utcOffset(2);
+        const date = moment(match[1], DATE_FORMAT).utcOffset(3);
 
         if (!date.isValid()) {
           bot.sendMessage(chatId, "Invalid date provided!");
