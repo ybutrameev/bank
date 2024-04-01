@@ -63,7 +63,7 @@ const getParsedTransactionsWithInterval = async (signatures) => {
 const getRevenueByDate = async (date) => {
   const signatures = await getSignaturesWithInterval(new PublicKey(ADDRESS_TO_MONITOR));
   const todaySignatureIds = signatures.reduce((acc, curr) => {
-    if (isBlockTimeInDate(curr.blockTime, new Date(date))) {
+    if (isBlockTimeInDate(curr.blockTime, date)) {
       acc.push(curr.signature);
     }
 

@@ -1,7 +1,10 @@
+const moment = require('moment');
+const { DATE_FORMAT } = require('../tg/config');
+
 const TRANSFER_TRANSACTION_TYPE = 'transfer';
 
 const isBlockTimeInDate = (timestamp, date) => {
-  return date.setHours(0, 0, 0, 0) === new Date(timestamp * 1000).setHours(0, 0, 0, 0);
+  return moment.unix(timestamp).utcOffset(3).format(DATE_FORMAT) === date.format(DATE_FORMAT);
 };
 
 const isReceiveTransaction = (transaction, monitorAddress) => {
