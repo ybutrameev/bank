@@ -22,7 +22,7 @@ const today = (bot) => {
         const { message_id } = await bot.sendMessage(chatId, `Calculating for ${date.format(DATE_FORMAT)}...`);
         const amount = await getRevenueByDate(date);
         bot.deleteMessage(chatId, message_id);
-        bot.sendMessage(chatId, `!!Amount for ${date.format(DATE_FORMAT)}: ${amount.toFixed(2)}`, {
+        bot.sendMessage(chatId, `!!!Amount for ${date.format(DATE_FORMAT)}: ${amount.toFixed(2)}`, {
           reply_markup: REPLY_MARKUP_BUTTON,
         });
       },

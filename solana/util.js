@@ -4,7 +4,7 @@ const { DATE_FORMAT } = require('../tg/config');
 const TRANSFER_TRANSACTION_TYPE = 'transfer';
 
 const isBlockTimeInDate = (timestamp, date) => {
-  return moment.unix(timestamp).format(DATE_FORMAT) === date.format(DATE_FORMAT);
+  return moment.unix(timestamp).tz('Europe/Riga').format(DATE_FORMAT) === date.format(DATE_FORMAT);
 };
 
 const isReceiveTransaction = (transaction, monitorAddress) => {
