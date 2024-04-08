@@ -5,6 +5,7 @@ const {
 } = require('./config');
 const {
   isReceiveTransaction,
+  isSendTransaction,
   isBlockTimeInDate,
   sleep
 } = require('./util');
@@ -28,7 +29,7 @@ const getSignaturesWithInterval = async (publicKey) => {
     } else {
       signatures.push(...items);
       lastSignature = items[items.length - 1].signature;
-      console.log('Current transactions length:', signatures.length)
+      console.log('Current signatures length:', signatures.length)
 
       if (signatures.length) {
         await sleep(1000);
@@ -77,6 +78,10 @@ const getRevenueByDate = async (date) => {
       if (isReceiveTransaction(curr, ADDRESS_TO_MONITOR)) {
         if (curr.parsed.info.lamports) {
           amount = amount + curr.parsed.info.lamports / LAMPORTS_PER_SOL;
+        }
+      } else if (isSendTransaction(curr, ADDRESS_TO_MONITOR)) {
+        if (curr.parsed.info.lamports) {
+          amount = amount - curr.parsed.info.lamports / LAMPORTS_PER_SOL;
         }
       }
       return acc;
