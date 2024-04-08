@@ -79,10 +79,6 @@ const getRevenueByDate = async (date) => {
         if (curr.parsed.info.lamports) {
           amount = amount + curr.parsed.info.lamports / LAMPORTS_PER_SOL;
         }
-      } else if (isSendTransaction(curr, ADDRESS_TO_MONITOR)) {
-        if (curr.parsed.info.lamports) {
-          amount = amount - curr.parsed.info.lamports / LAMPORTS_PER_SOL;
-        }
       }
       return acc;
     }, {});
