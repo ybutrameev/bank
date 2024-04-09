@@ -20,9 +20,15 @@ const byDate = (bot) => {
         }
       
         const { message_id } = await bot.sendMessage(chatId, `Calculating for ${date.format(DATE_FORMAT)}...`);
-        const amount = await getRevenueByDate(date);
+        const {
+          positiveAmount,
+          negativeAmount,
+          total
+        } = await getRevenueByDate(date);
         bot.deleteMessage(chatId, message_id);
-        bot.sendMessage(chatId, `Amount for ${date.format(DATE_FORMAT)}: ${amount.toFixed(2)}`, {
+        bot.sendMessage(chatId, `
+          Received amount for ${date.format(DATE_FORMAT)}: ${positiveAmount.toFixed(2)}\nSent amount for ${date.format(DATE_FORMAT)}: ${negativeAmount.toFixed(2)}\nTotal for ${date.format(DATE_FORMAT)}: ${total.toFixed(2)}
+        `, {
           reply_markup: REPLY_MARKUP_BUTTON,
         });
       },

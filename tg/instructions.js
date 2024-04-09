@@ -13,8 +13,10 @@ const weekBeforeInstruction = async (bot, msg) => {
 
   const { message_id } = await bot.sendMessage(chatId, `Calculating from ${dateWeekBefore.format(DATE_FORMAT)} to ${yesterdayDate.format(DATE_FORMAT)}...`);
   for (const item of array) {
-    const amount = await getRevenueByDate(moment().subtract(item, 'days'));
-    totalAmount = totalAmount + amount;
+    const {
+      positiveAmount
+    } = await getRevenueByDate(moment().subtract(item, 'days'));
+    totalAmount = totalAmount + positiveAmount;
   }
   
   bot.deleteMessage(chatId, message_id);

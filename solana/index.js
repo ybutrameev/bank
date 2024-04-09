@@ -71,20 +71,32 @@ const getRevenueByDate = async (date) => {
     return acc;
   }, []);
   const parsedTransactions = await getParsedTransactionsWithInterval(todaySignatureIds);
-  let amount = 0;
+  let positiveAmount = 0;
+  let negativeAmount = 0;
+  let total = 0;
   
   for (const item of parsedTransactions) {
     item.transaction.message.instructions.reduce((acc, curr) => {
       if (isReceiveTransaction(curr, ADDRESS_TO_MONITOR)) {
         if (curr.parsed.info.lamports) {
-          amount = amount + curr.parsed.info.lamports / LAMPORTS_PER_SOL;
+          total = total + curr.parsed.info.lamports / LAMPORTS_PER_SOL;
+          positiveAmount = positiveAmount + curr.parsed.info.lamports / LAMPORTS_PER_SOL;
+        }
+      } else if (isSendTransaction(curr, ADDRESS_TO_MONITOR)) {
+        if (curr.parsed.info.lamports) {
+          total = total - curr.parsed.info.lamports / LAMPORTS_PER_SOL;
+          negativeAmount = negativeAmount - curr.parsed.info.lamports / LAMPORTS_PER_SOL;
         }
       }
       return acc;
     }, {});
   }
   
-  return amount;
+  return {
+    positiveAmount,
+    negativeAmount,
+    total
+  };
 };
 
 module.exports = {

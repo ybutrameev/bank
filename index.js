@@ -18,8 +18,12 @@ yesterday(bot);
 week(bot);
 
 // const test = async () => {
-//   const a = await getRevenueByDate(moment('01/04/2024', DATE_FORMAT));
-//   console.log(a)
+//   const {
+//     positiveAmount,
+//     negativeAmount,
+//     total
+//   } = await getRevenueByDate(moment('09/04/2024', DATE_FORMAT));
+//   console.log(positiveAmount, negativeAmount, total)
 // };
 
 // test();
